@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScrollBlocks — Digital Engineering & Creators of Yapper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* ScrollBlocks Theme */
+      --sb-bg: #020612;
+      --sb-dark-blue: #040d24;
+      --sb-electric: #0066ff;
+      --sb-vibrant: #1a75ff;
+      --sb-glow: rgba(0, 102, 255, 0.4);
+      --sb-cyan: #38bdf8;
+      --sb-border: rgba(37, 117, 252, 0.22);
+
+      /* Yapper Theme */
+      --yap-black: #050505;
+      --yap-neon-blue: #1b6bff;
+
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--sb-bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.22) 0%, transparent 60%),
+        linear-gradient(to bottom, #020612 0%, #03081a 100%);
+      background-attachment: fixed;
+    }
+
+    /* ScrollBlocks Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(2, 6, 18, 0.85);
+      border-bottom: 1px solid var(--sb-border);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-sb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: -0.5px;
+    }
+
+    .sb-logo-box {
+      width: 44px;
+      height: 44px;
+      background: radial-gradient(circle at center, #001238 0%, #01081a 100%);
+      border: 1px solid var(--sb-border);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 18px rgba(0, 102, 255, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0.75rem 1.6rem;
+      font-weight: 800;
+      font-size: 0.92rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-sb {
+      background: linear-gradient(135deg, var(--sb-electric), #1e40af);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0, 102, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-sb:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 102, 255, 0.7);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.4rem 1.1rem;
+      background: rgba(0, 102, 255, 0.12);
+      border: 1px solid var(--sb-border);
+      border-radius: 40px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--sb-cyan);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.12;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--sb-electric) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* =========================================
+       THE YAPPER SPOTLIGHT (IN DEVELOPMENT)
+       ========================================= */
+    .yapper-spotlight {
+      background: radial-gradient(circle at 80% 20%, rgba(27, 107, 255, 0.15) 0%, transparent 60%), #05070f;
+      border: 2px solid rgba(27, 107, 255, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 102, 255, 0.15);
+      margin: 2rem 0 5rem;
+    }
+
+    .yapper-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .dev-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--yap-neon-blue);
+      color: var(--sb-cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulsing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--yap-neon-blue);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--yap-neon-blue);
+      animation: pulseDot 1.4s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .yapper-info h2 {
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1.2rem;
+    }
+
+    .yapper-info h2 span {
+      color: #ffffff;
+      text-shadow: 0 0 25px rgba(27, 107, 255, 0.8);
+      font-style: italic;
+    }
+
+    .yapper-info p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* Development Status Board */
+    .dev-card-status {
+      background: #000000;
+      border: 1px solid rgba(27, 107, 255, 0.4);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      max-width: 480px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+
+    .progress-bar-fill {
+      width: 68%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--yap-neon-blue), var(--sb-cyan));
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(27, 107, 255, 0.8);
+    }
+
+    .status-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Mock Phone / Feed Frame */
+    .phone-mockup {
+      background: #000000;
+      border: 3px solid #1a2238;
+      border-radius: 36px;
+      padding: 1.8rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(27, 107, 255, 0.2);
+      position: relative;
+    }
+
+    .mockup-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .app-icon-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Refined Yapper Logo Squircle */
+    .y-logo-squircle {
+      width: 48px;
+      height: 48px;
+      background: #000;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 16px rgba(27, 107, 255, 0.45);
+      border: 1px solid rgba(27, 107, 255, 0.5);
+    }
+
+    .feed-card {
+      background: #0a0d16;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .feed-card.highlight {
+      border-color: rgba(27, 107, 255, 0.5);
+      background: rgba(27, 107, 255, 0.04);
+    }
+
+    .feed-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .feed-user span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .audio-yap-bar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 26px;
+      background: rgba(27, 107, 255, 0.15);
+      border-radius: 8px;
+      padding: 0 10px;
+      margin-top: 8px;
+    }
+
+    .audio-yap-bar div {
+      width: 4px;
+      border-radius: 2px;
+      background: var(--yap-neon-blue);
+      animation: pulse 1.2s infinite ease-in-out alternate;
+    }
+
+    .audio-yap-bar div:nth-child(1) { height: 35%; }
+    .audio-yap-bar div:nth-child(2) { height: 85%; animation-delay: 0.2s; }
+    .audio-yap-bar div:nth-child(3) { height: 50%; animation-delay: 0.4s; }
+    .audio-yap-bar div:nth-child(4) { height: 100%; animation-delay: 0.1s; }
+    .audio-yap-bar div:nth-child(5) { height: 60%; animation-delay: 0.3s; }
+
+    @keyframes pulse {
+      0% { height: 25%; }
+      100% { height: 95%; }
+    }
+
+    /* =========================================
+       LEADERSHIP / CREATORS SECTION
+       ========================================= */
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.3rem;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto 5rem;
+    }
+
+    .team-card {
+      background: linear-gradient(180deg, rgba(4, 13, 36, 0.8) 0%, rgba(2, 6, 18, 0.95) 100%);
+      border: 1px solid var(--sb-border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--sb-vibrant);
+      box-shadow: 0 16px 40px rgba(0, 102, 255, 0.25);
+    }
+
+    .team-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 102, 255, 0.15);
+      border: 1px solid var(--sb-electric);
+      color: var(--sb-cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .avatar-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
+      background: radial-gradient(circle, #0066ff 0%, #001f5c 100%);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.25rem;
+      font-size: 2rem;
+      box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+    }
+
+    .team-card h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-role {
+      color: var(--sb-cyan);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* SCROLLBLOCKS ARCHITECTURE GRID */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .sb-card {
+      background: linear-gradient(180deg, rgba(4, 13, 36, 0.7) 0%, rgba(2, 6, 18, 0.9) 100%);
+      border: 1px solid var(--sb-border);
+      border-radius: var(--radius-md);
+      padding: 2.4rem 2rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .sb-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--sb-vibrant);
+      box-shadow: 0 16px 40px rgba(0, 102, 255, 0.2);
+    }
+
+    .sb-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(0, 102, 255, 0.12);
+      border: 1px solid var(--sb-border);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.5rem;
+      color: var(--sb-cyan);
+    }
+
+    .sb-card h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .sb-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--sb-border);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background: #01040d;
+    }
+
+    @media (max-width: 900px) {
+      .yapper-grid {
+        grid-template-columns: 1fr;
+      }
+      .yapper-spotlight {
+        padding: 2rem 1.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-sb">
+        <!-- Exact ScrollBlocks Logo SVG -->
+        <div class="sb-logo-box">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+            <rect x="26" y="14" width="48" height="12" rx="6" fill="#0066ff"/>
+            <rect x="26" y="30" width="48" height="12" rx="6" fill="#ffffff"/>
+            <rect x="26" y="46" width="48" height="24" rx="6" fill="#0066ff"/>
+            <path d="M30 74 L50 90 L70 74 L60 64 L50 72 L40 64 Z" fill="#ffffff"/>
+            <path d="M14 36 C14 26 22 28 22 28 V70 C22 70 14 72 14 62 Z" fill="#0066ff"/>
+            <path d="M86 36 C86 26 78 28 78 28 V70 C78 70 86 72 86 62 Z" fill="#0066ff"/>
+          </svg>
+        </div>
+        ScrollBlocks
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">Studio</a></li>
+        <li><a href="#yapper">Yapper</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#engineering">Architecture</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Studio Hero Section -->
+  <section class="container hero" id="about">
+    <div class="hero-pill">
+      <span>●</span> Digital Architecture & Product Engineering
+    </div>
+    <h1>We build modular systems and <span>authentic social experiences</span>.</h1>
+    <p>ScrollBlocks is a digital creation studio engineered to deliver high-speed web frameworks and our flagship teen-focused social ecosystem: <strong>Yapper</strong>.</p>
+    <div>
+      <a href="#yapper" class="btn btn-sb">View Yapper Progress</a>
+    </div>
+  </section>
+
+  <!-- THE YAPPER SPOTLIGHT (DEVELOPING STATUS) -->
+  <section class="container" id="yapper">
+    <div class="yapper-spotlight">
+      <div class="yapper-grid">
+        
+        <!-- Yapper Information & Active Dev Board -->
+        <div class="yapper-info">
+          <div class="dev-badge">
+            <div class="pulsing-dot"></div>
+            <span>Currently In Development</span>
+          </div>
+          <h2>We are creating <span>Yapper</span>.<br>Social media made for teens only.</h2>
+          <p>
+            No algorithmic clutter, no corporate ads, and no adult feed noise. 
+            ScrollBlocks is actively developing <strong>Yapper</strong> from the ground up: an exclusive space for genuine teen squads, live drop-in voice rooms, and dynamic block posting.
+          </p>
+
+          <!-- Development Status Board (Replaces Early Yap) -->
+          <div class="dev-card-status">
+            <div class="status-row">
+              <span style="color: #fff;">Development Phase: Core Feed & Audio</span>
+              <span style="color: var(--sb-cyan);">68% Complete</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <div class="status-note">
+              ● Engine: ScrollBlocks Realtime Framework • Age-Fence: Strict Teen Verification
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Mockup with Refined Yapper Logo -->
+        <div class="phone-mockup">
+          <div class="mockup-top">
+            <div class="app-icon-wrap">
+              <div class="y-logo-squircle">
+                <!-- High-Precision Yapper Logo SVG -->
+                <svg width="34" height="34" viewBox="0 0 120 120" fill="none">
+                  <!-- Sharp 3-Point Royal Blue Crown -->
+                  <path d="M28 42 L34 22 L54 32 L74 20 L82 42 Q54 48 28 42 Z" 
+                        fill="#1b6bff" stroke="#004cd8" stroke-width="2"/>
+                  
+                  <!-- Blue Drop Shadow / Outline behind the 'y' -->
+                  <path d="M46 44 C49 57 56 68 66 64 L79 43 C83 43 88 50 82 60 L64 90 C56 102 44 98 48 89 C52 81 59 84 62 79 L67 71 C52 71 40 58 46 44 Z" 
+                        fill="#1b6bff"/>
+                  
+                  <!-- Foreground White Cursive 'y' -->
+                  <path d="M43 42 C46 55 53 66 63 62 L76 41 C80 41 85 48 79 58 L61 88 C53 100 41 96 45 87 C49 79 56 82 59 77 L64 69 C49 69 37 56 43 42 Z" 
+                        fill="#ffffff"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight: 900; font-size: 1.1rem; letter-spacing: -0.5px;">Yapper</div>
+                <div style="font-size: 0.72rem; color: var(--sb-cyan); font-weight: 700;">TEENS ONLY VERIFIED</div>
+              </div>
+            </div>
+            <span style="font-size: 0.75rem; background: rgba(0, 102, 255, 0.2); border: 1px solid var(--yap-neon-blue); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 700;">In Build</span>
+          </div>
+
+          <div class="feed-card highlight">
+            <div class="feed-user">⚡ travis.sb <span>• 2m ago</span></div>
+            <p style="font-size: 0.92rem;">Testing real-time audio blocks on the Yapper alpha build. Zero lag.</p>
+            <div class="audio-yap-bar">
+              <div></div><div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+
+          <div class="feed-card">
+            <div class="feed-user">👑 naman.core <span>• 8m ago</span></div>
+            <p style="font-size: 0.92rem;">ScrollBlocks backend is locked in. Ready to host teen communities safely.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP / BUSINESS FOUNDERS -->
+  <section class="container" id="leadership">
+    <div class="section-title">
+      <h2>ScrollBlocks Leadership</h2>
+      <p>The vision and architecture behind the company and the Yapper platform.</p>
+    </div>
+
+    <div class="team-grid">
+      <!-- Harshith (Travis) -->
+      <div class="team-card">
+        <span class="team-badge">Owner</span>
+        <div class="avatar-circle">⚡</div>
+        <h3>Harshith (Travis)</h3>
+        <div class="team-role">Founder & Owner</div>
+        <p class="team-desc">Directs product vision, system design, and the core experience for ScrollBlocks and Yapper.</p>
+      </div>
+
+      <!-- Naman -->
+      <div class="team-card">
+        <span class="team-badge">Co-Owner</span>
+        <div class="avatar-circle">🛡️</div>
+        <h3>Naman</h3>
+        <div class="team-role">Co-Founder & Co-Owner</div>
+        <p class="team-desc">Oversees project development, core operations, and community architecture for the studio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="container" id="engineering">
+    <div class="section-title">
+      <h2>Architected by ScrollBlocks</h2>
+      <p>The performance foundations powering Yapper and our digital ecosystem.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="sb-card">
+        <div class="sb-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
+          </svg>
+        </div>
+        <h3>Ultra-Low Latency Engine</h3>
+        <p>Built with instant edge WebSockets so voice notes, posts, and real-time yap lounges deliver with zero delay.</p>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3>Teen Boundary Protection</h3>
+        <p>Cryptographic age-verification and anti-bot systems engineered to keep Yapper exclusively for teenagers.</p>
+      </div>
+
+      <div class="sb-card">
+        <div class="sb-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+        <h3>Modular Block Framework</h3>
+        <p>Our signature block design enables creators to stack audio waves, text thoughts, and interactive feeds effortlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <strong>ScrollBlocks Inc.</strong> Founded by Harshith (Travis) & Naman. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
