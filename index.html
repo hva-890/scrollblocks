@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScrollBlocks Inc.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ScrollBlocks</title>
 
-  <!-- ScrollBlocks Custom Tab Favicon (SVG Embedded) -->
+  <!-- ScrollBlocks Custom Tab Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2300102b'/%3E%3Crect x='26' y='14' width='48' height='12' rx='6' fill='%230066ff'/%3E%3Crect x='26' y='30' width='48' height='12' rx='6' fill='%23ffffff'/%3E%3Crect x='26' y='46' width='48' height='24' rx='6' fill='%230066ff'/%3E%3Cpath d='M30 74 L50 90 L70 74 L60 64 L50 72 L40 64 Z' fill='%23ffffff'/%3E%3Cpath d='M14 36 C14 26 22 28 22 28 V70 C22 70 14 72 14 62 Z' fill='%230066ff'/%3E%3Cpath d='M86 36 C86 26 78 28 78 28 V70 C78 70 86 72 86 62 Z' fill='%230066ff'/%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,6 @@
 
   <style>
     :root {
-      /* ScrollBlocks Theme */
       --sb-bg: #020612;
       --sb-dark-blue: #040d24;
       --sb-electric: #0066ff;
@@ -23,7 +22,6 @@
       --sb-cyan: #38bdf8;
       --sb-border: rgba(37, 117, 252, 0.22);
 
-      /* Yapper Theme */
       --yap-black: #050505;
       --yap-neon-blue: #1b6bff;
 
@@ -31,7 +29,7 @@
       --text-muted: #94a3b8;
       --radius-sm: 12px;
       --radius-md: 20px;
-      --radius-lg: 32px;
+      --radius-lg: 28px;
       --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -40,6 +38,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -55,9 +54,10 @@
         radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.22) 0%, transparent 60%),
         linear-gradient(to bottom, #020612 0%, #03081a 100%);
       background-attachment: fixed;
+      padding-bottom: 70px;
     }
 
-    /* ScrollBlocks Navigation */
+    /* Navigation */
     header {
       position: sticky;
       top: 0;
@@ -71,7 +71,7 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 0.85rem 1.25rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -80,28 +80,29 @@
     .brand-sb {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: #fff;
       font-weight: 900;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       letter-spacing: -0.5px;
     }
 
     .sb-logo-box {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       background: radial-gradient(circle at center, #001238 0%, #01081a 100%);
       border: 1px solid var(--sb-border);
-      border-radius: 12px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      box-shadow: 0 4px 18px rgba(0, 102, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.8rem;
       align-items: center;
       list-style: none;
     }
@@ -116,6 +117,55 @@
 
     .nav-links a:hover {
       color: #fff;
+    }
+
+    /* Mobile Hamburger */
+    .mobile-menu-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--sb-border);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      transition: var(--transition);
+    }
+
+    .mobile-dropdown {
+      display: none;
+      flex-direction: column;
+      background: rgba(2, 6, 18, 0.98);
+      border-bottom: 1px solid var(--sb-border);
+      padding: 1.2rem 1.5rem;
+      gap: 1rem;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      backdrop-filter: blur(20px);
+    }
+
+    .mobile-dropdown a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-dropdown.active {
+      display: flex;
     }
 
     .btn {
@@ -140,21 +190,16 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .btn-sb:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(0, 102, 255, 0.7);
-    }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 4.5rem 1.5rem;
+      padding: 4rem 1.5rem;
     }
 
     /* Hero Section */
     .hero {
       text-align: center;
-      padding-top: 4rem;
+      padding-top: 3rem;
       padding-bottom: 2rem;
     }
 
@@ -162,23 +207,23 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 0.4rem 1.1rem;
+      padding: 0.4rem 1rem;
       background: rgba(0, 102, 255, 0.12);
       border: 1px solid var(--sb-border);
       border-radius: 40px;
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--sb-cyan);
       margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-size: clamp(2.1rem, 5.5vw, 4.4rem);
       font-weight: 900;
-      letter-spacing: -1.5px;
-      line-height: 1.12;
+      letter-spacing: -1px;
+      line-height: 1.15;
       max-width: 900px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1.25rem;
     }
 
     .hero h1 span {
@@ -188,10 +233,10 @@
     }
 
     .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--text-muted);
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
     }
 
     /* THE YAPPER SPOTLIGHT */
@@ -199,17 +244,17 @@
       background: radial-gradient(circle at 80% 20%, rgba(27, 107, 255, 0.15) 0%, transparent 60%), #05070f;
       border: 2px solid rgba(27, 107, 255, 0.35);
       border-radius: var(--radius-lg);
-      padding: 3.5rem;
+      padding: 3rem 2rem;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 102, 255, 0.15);
-      margin: 2rem 0 5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 102, 255, 0.15);
+      margin: 1.5rem 0 4.5rem;
     }
 
     .yapper-grid {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
-      gap: 3.5rem;
+      gap: 3rem;
       align-items: center;
     }
 
@@ -217,12 +262,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       border: 1px solid var(--yap-neon-blue);
       color: var(--sb-cyan);
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -244,11 +289,11 @@
     }
 
     .yapper-info h2 {
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-size: clamp(1.85rem, 4vw, 3.2rem);
       font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      margin-bottom: 1.2rem;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 1.1rem;
     }
 
     .yapper-info h2 span {
@@ -259,9 +304,49 @@
 
     .yapper-info p {
       color: #cbd5e1;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ALPHA 1.0 BLUEPRINT BUTTON TRIGGER */
+    .blueprint-callout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(27, 107, 255, 0.2) 0%, rgba(56, 189, 248, 0.1) 100%);
+      border: 1.5px solid var(--yap-neon-blue);
+      border-radius: 16px;
+      padding: 1rem 1.4rem;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 0 25px rgba(27, 107, 255, 0.35);
+      transition: var(--transition);
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .blueprint-callout-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(27, 107, 255, 0.35) 0%, rgba(56, 189, 248, 0.2) 100%);
+      box-shadow: 0 0 35px rgba(27, 107, 255, 0.6);
+      border-color: var(--sb-cyan);
+    }
+
+    .blueprint-callout-btn span.tag {
+      background: #1b6bff;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     /* Development Status Board */
@@ -269,7 +354,7 @@
       background: #000000;
       border: 1px solid rgba(27, 107, 255, 0.4);
       border-radius: 16px;
-      padding: 1.2rem 1.4rem;
+      padding: 1.2rem;
       max-width: 480px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     }
@@ -278,8 +363,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.75rem;
-      font-size: 0.88rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.85rem;
       font-weight: 700;
     }
 
@@ -289,7 +374,7 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .progress-bar-fill {
@@ -301,16 +386,17 @@
     }
 
     .status-note {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* Mock Phone / Feed Frame */
     .phone-mockup {
       background: #000000;
       border: 3px solid #1a2238;
-      border-radius: 36px;
-      padding: 1.8rem;
+      border-radius: 30px;
+      padding: 1.5rem;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(27, 107, 255, 0.2);
       position: relative;
     }
@@ -319,35 +405,35 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .app-icon-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    /* Yapper Logo Squircle */
     .y-logo-squircle {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       background: #000;
-      border-radius: 14px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
       box-shadow: 0 0 16px rgba(27, 107, 255, 0.45);
       border: 1px solid rgba(27, 107, 255, 0.5);
+      flex-shrink: 0;
     }
 
     .feed-card {
       background: #0a0d16;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-sm);
-      padding: 1.1rem;
-      margin-bottom: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
     }
 
     .feed-card.highlight {
@@ -359,13 +445,13 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 800;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .feed-user span {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       font-weight: 500;
     }
@@ -374,10 +460,10 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      height: 26px;
+      height: 24px;
       background: rgba(27, 107, 255, 0.15);
       border-radius: 8px;
-      padding: 0 10px;
+      padding: 0 8px;
       margin-top: 8px;
     }
 
@@ -399,46 +485,46 @@
       100% { height: 95%; }
     }
 
-    /* LEADERSHIP / FOUNDERS */
+    /* LEADERSHIP SECTION */
     .section-title {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 2.8rem;
     }
 
     .section-title h2 {
-      font-size: 2.3rem;
+      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
       font-weight: 900;
-      letter-spacing: -0.8px;
-      margin-bottom: 0.75rem;
+      letter-spacing: -0.6px;
+      margin-bottom: 0.5rem;
     }
 
     .section-title p {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 1rem;
       max-width: 600px;
       margin: 0 auto;
     }
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
       max-width: 800px;
-      margin: 0 auto 5rem;
+      margin: 0 auto 4.5rem;
     }
 
     .team-card {
       background: linear-gradient(180deg, rgba(4, 13, 36, 0.8) 0%, rgba(2, 6, 18, 0.95) 100%);
       border: 1px solid var(--sb-border);
       border-radius: var(--radius-md);
-      padding: 2.5rem 2rem;
+      padding: 2rem 1.5rem;
       text-align: center;
       transition: var(--transition);
       position: relative;
     }
 
     .team-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: var(--sb-vibrant);
       box-shadow: 0 16px 40px rgba(0, 102, 255, 0.25);
     }
@@ -450,124 +536,275 @@
       background: rgba(0, 102, 255, 0.15);
       border: 1px solid var(--sb-electric);
       color: var(--sb-cyan);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .avatar-circle {
-      width: 76px;
-      height: 76px;
-      border-radius: 24px;
+      width: 70px;
+      height: 70px;
+      border-radius: 22px;
       background: radial-gradient(circle, #0066ff 0%, #001f5c 100%);
       border: 2px solid rgba(255, 255, 255, 0.15);
       display: grid;
       place-items: center;
-      margin: 0 auto 1.25rem;
-      font-size: 2rem;
+      margin: 0 auto 1.1rem;
+      font-size: 1.8rem;
       box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
     }
 
     .team-card h3 {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 800;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .team-role {
       color: var(--sb-cyan);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .team-desc {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.5;
     }
 
-    /* SCROLLBLOCKS ARCHITECTURE GRID */
+    /* ARCHITECTURE GRID */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .sb-card {
       background: linear-gradient(180deg, rgba(4, 13, 36, 0.7) 0%, rgba(2, 6, 18, 0.9) 100%);
       border: 1px solid var(--sb-border);
       border-radius: var(--radius-md);
-      padding: 2.4rem 2rem;
+      padding: 2rem 1.6rem;
       transition: var(--transition);
       position: relative;
     }
 
     .sb-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: var(--sb-vibrant);
       box-shadow: 0 16px 40px rgba(0, 102, 255, 0.2);
     }
 
     .sb-card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       background: rgba(0, 102, 255, 0.12);
       border: 1px solid var(--sb-border);
       display: grid;
       place-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       color: var(--sb-cyan);
     }
 
     .sb-card h3 {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 800;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .sb-card p {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      line-height: 1.6;
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    /* =========================================
+       ALPHA 1.0 BLUEPRINT MODAL POPUP
+       ========================================= */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 6, 18, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      animation: fadeInModal 0.25s ease forwards;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-container {
+      background: #000000;
+      border: 2px solid var(--yap-neon-blue);
+      box-shadow: 0 0 50px rgba(27, 107, 255, 0.5);
+      border-radius: 24px;
+      max-width: 950px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--sb-border);
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .close-modal-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.2rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-modal-btn:hover {
+      background: var(--yap-neon-blue);
+      border-color: var(--yap-neon-blue);
+    }
+
+    .modal-body {
+      padding: 1rem;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--sb-border);
-      padding: 3.5rem 1.5rem;
+      padding: 3rem 1.25rem;
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       background: #01040d;
     }
 
-    @media (max-width: 900px) {
-      .yapper-grid {
-        grid-template-columns: 1fr;
+    /* Mobile Bottom Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(2, 6, 18, 0.92);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--sb-border);
+      z-index: 999;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .bottom-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      gap: 3px;
+    }
+
+    .bottom-tab:hover {
+      color: var(--sb-cyan);
+    }
+
+    .bottom-tab svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-bottom: 75px;
       }
-      .yapper-spotlight {
-        padding: 2rem 1.5rem;
+
+      .container {
+        padding: 3rem 1rem;
       }
+
       .nav-links {
         display: none;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .yapper-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .yapper-spotlight {
+        padding: 1.8rem 1.2rem;
+        border-radius: 20px;
+      }
+
+      .phone-mockup {
+        border-radius: 22px;
+        padding: 1.2rem;
+      }
+
+      .mobile-bottom-nav {
+        display: flex;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Top Navigation -->
   <header>
     <div class="nav-container">
       <a href="#" class="brand-sb">
-        <!-- ScrollBlocks Logo SVG -->
         <div class="sb-logo-box">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
             <rect x="26" y="14" width="48" height="12" rx="6" fill="#0066ff"/>
             <rect x="26" y="30" width="48" height="12" rx="6" fill="#ffffff"/>
             <rect x="26" y="46" width="48" height="24" rx="6" fill="#0066ff"/>
@@ -585,6 +822,19 @@
         <li><a href="#leadership">Leadership</a></li>
         <li><a href="#engineering">Architecture</a></li>
       </ul>
+
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="mobile-dropdown" id="mobileDropdown">
+      <a href="#about" onclick="closeMenu()">Studio</a>
+      <a href="#yapper" onclick="closeMenu()">Yapper (App)</a>
+      <a href="#leadership" onclick="closeMenu()">Leadership</a>
+      <a href="#engineering" onclick="closeMenu()">Architecture</a>
     </div>
   </header>
 
@@ -600,7 +850,7 @@
     </div>
   </section>
 
-  <!-- THE YAPPER SPOTLIGHT (DEVELOPING STATUS) -->
+  <!-- THE YAPPER SPOTLIGHT -->
   <section class="container" id="yapper">
     <div class="yapper-spotlight">
       <div class="yapper-grid">
@@ -617,6 +867,12 @@
             ScrollBlocks is actively developing <strong>Yapper</strong> from the ground up: an exclusive space for genuine teen squads, live drop-in voice rooms, and dynamic block posting.
           </p>
 
+          <!-- NEW: WANNA SEE OUR ALPHA 1.0 BLUEPRINT BUTTON -->
+          <div class="blueprint-callout-btn" onclick="openBlueprintModal()">
+            <span>⚡ Wanna see our Alpha 1.0 blueprint of Yapper? Click here!</span>
+            <span class="tag">Alpha 1.0</span>
+          </div>
+
           <!-- Development Status Board -->
           <div class="dev-card-status">
             <div class="status-row">
@@ -632,29 +888,28 @@
           </div>
         </div>
 
-        <!-- Phone Mockup with Yapper Logo -->
+        <!-- Phone Mockup Frame -->
         <div class="phone-mockup">
           <div class="mockup-top">
             <div class="app-icon-wrap">
               <div class="y-logo-squircle">
-                <!-- Yapper Crowned Logo SVG -->
-                <svg width="34" height="34" viewBox="0 0 120 120" fill="none">
+                <svg width="30" height="30" viewBox="0 0 120 120" fill="none">
                   <path d="M28 42 L34 22 L54 32 L74 20 L82 42 Q54 48 28 42 Z" fill="#1b6bff" stroke="#004cd8" stroke-width="2"/>
                   <path d="M46 44 C49 57 56 68 66 64 L79 43 C83 43 88 50 82 60 L64 90 C56 102 44 98 48 89 C52 81 59 84 62 79 L67 71 C52 71 40 58 46 44 Z" fill="#1b6bff"/>
                   <path d="M43 42 C46 55 53 66 63 62 L76 41 C80 41 85 48 79 58 L61 88 C53 100 41 96 45 87 C49 79 56 82 59 77 L64 69 C49 69 37 56 43 42 Z" fill="#ffffff"/>
                 </svg>
               </div>
               <div>
-                <div style="font-weight: 900; font-size: 1.1rem; letter-spacing: -0.5px;">Yapper</div>
-                <div style="font-size: 0.72rem; color: var(--sb-cyan); font-weight: 700;">TEENS ONLY VERIFIED</div>
+                <div style="font-weight: 900; font-size: 1.05rem; letter-spacing: -0.5px;">Yapper</div>
+                <div style="font-size: 0.7rem; color: var(--sb-cyan); font-weight: 700;">TEENS ONLY VERIFIED</div>
               </div>
             </div>
-            <span style="font-size: 0.75rem; background: rgba(0, 102, 255, 0.2); border: 1px solid var(--yap-neon-blue); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 700;">In Build</span>
+            <span style="font-size: 0.72rem; background: rgba(0, 102, 255, 0.2); border: 1px solid var(--yap-neon-blue); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700;">In Build</span>
           </div>
 
           <div class="feed-card highlight">
             <div class="feed-user">⚡ travis.sb <span>• 2m ago</span></div>
-            <p style="font-size: 0.92rem;">Testing real-time audio blocks on the Yapper alpha build. Zero lag.</p>
+            <p style="font-size: 0.9rem;">Testing real-time audio blocks on the Yapper alpha build. Zero lag.</p>
             <div class="audio-yap-bar">
               <div></div><div></div><div></div><div></div><div></div>
             </div>
@@ -662,7 +917,7 @@
 
           <div class="feed-card">
             <div class="feed-user">👑 naman.core <span>• 8m ago</span></div>
-            <p style="font-size: 0.92rem;">ScrollBlocks backend is locked in. Ready to host teen communities safely.</p>
+            <p style="font-size: 0.9rem;">ScrollBlocks backend is locked in. Ready to host teen communities safely.</p>
           </div>
         </div>
 
@@ -670,7 +925,7 @@
     </div>
   </section>
 
-  <!-- LEADERSHIP / BUSINESS FOUNDERS -->
+  <!-- LEADERSHIP SECTION -->
   <section class="container" id="leadership">
     <div class="section-title">
       <h2>ScrollBlocks Leadership</h2>
@@ -678,7 +933,6 @@
     </div>
 
     <div class="team-grid">
-      <!-- Harshith (Travis) -->
       <div class="team-card">
         <span class="team-badge">Owner</span>
         <div class="avatar-circle">⚡</div>
@@ -687,7 +941,6 @@
         <p class="team-desc">Directs product vision, system design, and the core experience for ScrollBlocks and Yapper.</p>
       </div>
 
-      <!-- Naman -->
       <div class="team-card">
         <span class="team-badge">Co-Owner</span>
         <div class="avatar-circle">🛡️</div>
@@ -742,10 +995,78 @@
     </div>
   </section>
 
+  <!-- ALPHA 1.0 BLUEPRINT MODAL -->
+  <div class="modal-overlay" id="blueprintModal" onclick="closeBlueprintModal(event)">
+    <div class="modal-container" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>⚡ Yapper Alpha 1.0 Blueprint Preview</h3>
+        <button class="close-modal-btn" onclick="closeBlueprintModal(event)" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Blueprint image link -->
+        <img id="blueprintImg" src="blueprint.png" alt="Yapper Alpha 1.0 UI Blueprint" />
+        <p style="color: var(--sb-cyan); font-size: 0.85rem; margin-top: 0.8rem; font-weight: 700;">
+          ScrollBlocks Architecture • Exclusive Teen Social Experience
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>&copy; 2026 <strong>ScrollBlocks Inc.</strong> Founded by Harshith (Travis) & Naman. All rights reserved.</p>
   </footer>
+
+  <!-- Mobile Phone Bottom Quick Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="#about" class="bottom-tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Studio
+    </a>
+    <a href="#yapper" class="bottom-tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Yapper
+    </a>
+    <a href="#leadership" class="bottom-tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      Team
+    </a>
+    <a href="#engineering" class="bottom-tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Stack
+    </a>
+  </nav>
+
+  <!-- JavaScript for Modals and Menu -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDropdown = document.getElementById('mobileDropdown');
+    const blueprintModal = document.getElementById('blueprintModal');
+
+    menuToggle.addEventListener('click', () => {
+      mobileDropdown.classList.toggle('active');
+    });
+
+    function closeMenu() {
+      mobileDropdown.classList.remove('active');
+    }
+
+    function openBlueprintModal() {
+      blueprintModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBlueprintModal(e) {
+      if (e) e.preventDefault();
+      blueprintModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBlueprintModal();
+    });
+  </script>
 
 </body>
 </html>
