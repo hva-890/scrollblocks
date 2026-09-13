@@ -119,7 +119,6 @@
       color: #fff;
     }
 
-    /* Mobile Hamburger */
     .mobile-menu-btn {
       display: none;
       background: rgba(255, 255, 255, 0.05);
@@ -306,35 +305,35 @@
       color: #cbd5e1;
       font-size: 1rem;
       line-height: 1.65;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* ALPHA 1.0 BLUEPRINT BUTTON TRIGGER */
+    /* THE BLUEPRINT CLICK BUTTON */
     .blueprint-callout-btn {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: linear-gradient(135deg, rgba(27, 107, 255, 0.2) 0%, rgba(56, 189, 248, 0.1) 100%);
-      border: 1.5px solid var(--yap-neon-blue);
+      background: linear-gradient(135deg, rgba(27, 107, 255, 0.25) 0%, rgba(56, 189, 248, 0.15) 100%);
+      border: 2px solid var(--yap-neon-blue);
       border-radius: 16px;
-      padding: 1rem 1.4rem;
+      padding: 1.1rem 1.4rem;
       color: #fff;
       cursor: pointer;
       text-decoration: none;
       font-weight: 800;
-      font-size: 0.95rem;
-      box-shadow: 0 0 25px rgba(27, 107, 255, 0.35);
+      font-size: 0.96rem;
+      box-shadow: 0 0 25px rgba(27, 107, 255, 0.4);
       transition: var(--transition);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
       width: 100%;
       max-width: 480px;
     }
 
     .blueprint-callout-btn:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, rgba(27, 107, 255, 0.35) 0%, rgba(56, 189, 248, 0.2) 100%);
-      box-shadow: 0 0 35px rgba(27, 107, 255, 0.6);
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, rgba(27, 107, 255, 0.4) 0%, rgba(56, 189, 248, 0.25) 100%);
+      box-shadow: 0 0 35px rgba(27, 107, 255, 0.7);
       border-color: var(--sb-cyan);
     }
 
@@ -342,7 +341,7 @@
       background: #1b6bff;
       color: #fff;
       font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
+      padding: 0.28rem 0.65rem;
       border-radius: 8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -391,7 +390,7 @@
       line-height: 1.4;
     }
 
-    /* Mock Phone / Feed Frame */
+    /* Phone Mockup Frame */
     .phone-mockup {
       background: #000000;
       border: 3px solid #1a2238;
@@ -623,7 +622,7 @@
     }
 
     /* =========================================
-       ALPHA 1.0 BLUEPRINT MODAL POPUP
+       MODAL BLUEPRINT POPUP
        ========================================= */
     .modal-overlay {
       display: none;
@@ -639,12 +638,6 @@
       justify-content: center;
       align-items: center;
       padding: 1.5rem;
-      animation: fadeInModal 0.25s ease forwards;
-    }
-
-    @keyframes fadeInModal {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     .modal-container {
@@ -658,7 +651,6 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      position: relative;
     }
 
     .modal-header {
@@ -671,11 +663,8 @@
     }
 
     .modal-header h3 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 900;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .close-modal-btn {
@@ -867,7 +856,7 @@
             ScrollBlocks is actively developing <strong>Yapper</strong> from the ground up: an exclusive space for genuine teen squads, live drop-in voice rooms, and dynamic block posting.
           </p>
 
-          <!-- NEW: WANNA SEE OUR ALPHA 1.0 BLUEPRINT BUTTON -->
+          <!-- BLUEPRINT BUTTON -->
           <div class="blueprint-callout-btn" onclick="openBlueprintModal()">
             <span>⚡ Wanna see our Alpha 1.0 blueprint of Yapper? Click here!</span>
             <span class="tag">Alpha 1.0</span>
@@ -1003,8 +992,11 @@
         <button class="close-modal-btn" onclick="closeBlueprintModal(event)" aria-label="Close modal">✕</button>
       </div>
       <div class="modal-body">
-        <!-- Blueprint image link -->
-        <img id="blueprintImg" src="blueprint.png" alt="Yapper Alpha 1.0 UI Blueprint" />
+        <img id="blueprintImg" src="blueprint.png" alt="Yapper Alpha 1.0 UI Blueprint" onerror="handleImgError(this)" />
+        <div id="imgFallback" style="display:none; padding: 2rem 1rem; color: #94a3b8;">
+          <p style="color:#38bdf8; font-weight:800; font-size:1.1rem; margin-bottom:0.5rem;">⚠️ Image Not Found Yet!</p>
+          <p style="font-size:0.9rem;">Make sure you upload your blueprint image into your GitHub repository with the exact filename: <code style="color:#fff; background:#1e293b; padding:2px 6px; border-radius:4px;">blueprint.png</code></p>
+        </div>
         <p style="color: var(--sb-cyan); font-size: 0.85rem; margin-top: 0.8rem; font-weight: 700;">
           ScrollBlocks Architecture • Exclusive Teen Social Experience
         </p>
@@ -1017,7 +1009,7 @@
     <p>&copy; 2026 <strong>ScrollBlocks Inc.</strong> Founded by Harshith (Travis) & Naman. All rights reserved.</p>
   </footer>
 
-  <!-- Mobile Phone Bottom Quick Bar -->
+  <!-- Mobile Bottom Nav -->
   <nav class="mobile-bottom-nav">
     <a href="#about" class="bottom-tab">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -1037,7 +1029,7 @@
     </a>
   </nav>
 
-  <!-- JavaScript for Modals and Menu -->
+  <!-- JavaScript -->
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const mobileDropdown = document.getElementById('mobileDropdown');
@@ -1062,7 +1054,11 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Close on Escape key
+    function handleImgError(img) {
+      img.style.display = 'none';
+      document.getElementById('imgFallback').style.display = 'block';
+    }
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeBlueprintModal();
     });
